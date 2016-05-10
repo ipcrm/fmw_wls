@@ -70,7 +70,7 @@ class fmw_wls::internal::wls_linux(
 
   if ( $fmw_wls::version in ['10.3.6', '12.1.1'] ) {
     exec{ 'Install WLS':
-      command     => "${java_home_dir}/bin/java -Xmx1024m -Djava.io.tmpdir=${fmw_wls::tmp_dir} -Duser.country=US -Duser.language=en -jar ${source_file} -mode=silent -silent_xml=${fmw_wls::tmp_dir}/${wls_template} -log=${fmw_wls::tmp_dir}/wls.log -log_priority=info",
+      command     => "${java_home_dir}/bin/java -Xmx1024m -Djava.io.tmpdir=${fmw_wls::tmp_dir} -Duser.country=US -Duser.language=en -jar ${source_file} -mode=silent -silent_xml=${fmw_wls::tmp_dir}/${wls_template} -log=${fmw_wls::tmp_dir}/wls.log -log_priority=info -ignoreSysPrereqs ",
       environment => ['JAVA_VENDOR=Sun', "JAVA_HOME=${java_home_dir}"],
       creates     => "${fmw_wls::middleware_home_dir}/modules",
       user        => $fmw_wls::os_user,
